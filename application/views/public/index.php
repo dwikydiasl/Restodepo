@@ -170,7 +170,7 @@ include "header2.php";
 	    					<div class="row">
 		    					<div class="list-gambar col-6 col-sm-6 col-md-6 col-lg-3">
 		    						<div class="hovereffect">							        
-					    				<a href="<?php echo base_url(); ?>Cari/carikategori/search/tepung">
+					    				<a href="<?php echo base_url(); ?>Cari/klikKategori/search/tepung">
 										    <img class="img-responsive" src="assets/gambar_toko/foto/produk-kelas-tepung.jpg"  alt="">
 										    <div class="overlay">
 										        <h2>Tepung</h2>

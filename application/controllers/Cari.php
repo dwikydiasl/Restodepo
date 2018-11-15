@@ -44,6 +44,7 @@ class Cari extends CI_Controller {
 	public function klikKategori()
 	{
 		$data = $this->uri->uri_to_assoc();
+		$id_kategori = $data['search'];
 		$data['detail'] 	= $this->toko_model->getKlikKategori($id_kategori);
 
 		$this->load->view('public/pencarian_produk',$data);
