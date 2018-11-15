@@ -28,8 +28,8 @@ class Produk extends CI_Controller {
 	
 	public function kategori_lainnya (){
 
-
-		$this->load->view('public/pencarian_produk');
+		$data['detail'] 	= $this->toko_model->getKategoriLainnya();
+		$this->load->view('public/pencarian_produk',$data);
 	}
 
 	public function detail (){

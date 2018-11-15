@@ -174,13 +174,48 @@ class Toko_model extends CI_Model
         return $query->result();
     }
 
-     public function getKlikKategori($id_kategori)
+     public function getKlikKategori($search)
     {
         $rowx = array();
-        $sql = "select aa.id_item, aa.nama, aa.deskripsi_singkat, aa.harga, aa.permalink from item_produk aa where aa.status_tampil=1 and aa.ishapus=0 order by aa.id_item desc limit 12";   
+        $sql = "select aa.idkategori, aa.id_item, aa.nama, aa.deskripsi_singkat, aa.harga, aa.permalink from item_produk aa where aa.status_tampil=1 and aa.ishapus=0 order by aa.idkategori desc limit 12";
+        $this->db->like('idkategori',$search);   
         $res = $this->db->query($sql);
         $result = $res->result_array();
         
+        foreach($result as $row2)
+        {
+            $id_item = $row2['id_item'];
+            $nama = $row2['nama'];
+            $deskripsi_singkat = $row2['deskripsi_singkat'];
+            $harga = $row2['harga'];
+            $permalink = $row2['permalink'];
+
+            $sql3 = "select thumbnail from item_produk_foto where id_item = '$id_item' order by id_foto asc limit 1";   
+            $res3 = $this->db->query($sql3);
+            $row3 = $res3->row_array();
+
+            $rowx[] = array(
+                "id_item" => $id_item, 
+                "nama" => $nama, 
+                "deskripsi_singkat" => $deskripsi_singkat, 
+                "harga" => $harga,
+                "permalink" => $permalink,
+                "gambar"=>$row3['thumbnail']
+            );
+        }
+        
+        return $rowx;
+        
+    }
+
+     public function getKategoriLainnya()
+    {
+        $rowx = array();
+        $sql = "select aa.id_item, aa.nama, aa.deskripsi_singkat, aa.harga, aa.permalink from item_produk aa where aa.status_tampil=1 and aa.ishapus=0 order by aa.id_penjual desc limit 12";   
+        $res = $this->db->query($sql);
+        $result = $res->result_array();
+        
+
         foreach($result as $row2)
         {
             $id_item = $row2['id_item'];
